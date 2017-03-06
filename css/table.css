@@ -1,0 +1,25 @@
+.rowtable { margin:0px; }
+.rowtable.th { font-weight:bold; border-bottom:2px solid #ddd; }
+.rowtable > div { padding:5px 10px; }
+
+input[type=checkbox] { width: 22px; height: 22px; position: relative;  }
+
+table.fixed { table-layout:fixed; }
+
+.tname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.th-id { width:80px; text-align:center }
+.td-id { text-align:center }
+
+.th-money { width:150px; text-align:right; }
+.td-money { text-align:right; }
+.td-money .field-sm { text-align:right; }
+
+.th-int, .th-date, .th-flag { width:150px; text-align:center; }
+.td-int, .td-date, .td-flag { text-align:center; }
+.td-int .field-sm, .td-date .field-sm, .td-flag .field-sm { text-align:center; }
+
+.td-crud:hover { cursor:pointer; background-color:#e5ffe5; border-radius:5px; }
+.td-crud .input { display:none; }
+.td-crud.edit { padding:3px; }
+.td-crud.edit .field-sm { height:29px; padding:0px 4px; width:100% !important; }

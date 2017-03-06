@@ -1,0 +1,15 @@
+#mainbar .a-fa { padding:10px; font-weight:bold; }
+#mainbar .a-fa .fa { vertical-align:middle; margin-left:5px; }
+
+#mainbar-mobile > a { 
+	padding:2px; 
+	border:0px; 
+	margin-top: 8px;
+    margin-right: 5px;
+    margin-bottom: 8px; 
+    margin-left:10px;
+    float:right;
+    color:#777;
+}
+
+a.hidden-md:focus, a.hidden-md:hover { color:#333 }

@@ -1,0 +1,65 @@
+<div id='table-add' class='container'>
+	<h3>Table Name</h3>
+	<input type='text' class='form-control' name='table-name' ng-model='TActrl.tempName' ng-keypress='TActrl.keyPress(-1,$event)'>
+	<h3>Fields</h3>
+
+	<div class='row rowtable th hidden-xs' style='font-size:16px'>
+		<div class='col-sm-1' style='text-align:center'>Field#</div>
+		<div class='col-sm-6'>Name</div>
+		<div class='col-sm-2' style='text-align:center'>Type</div>
+		<div class='col-sm-1' style='text-align:center'>Unique</div>
+		<div class='col-sm-2' style='text-align:center'>Actions</div>
+	</div>
+
+	<div class='row rowtable tr' ng-repeat='(index,field) in TActrl.tempfields' row-index='{{index}}'>
+		<div class='col-xs-3 col-sm-1'>
+			<label class='visible-xs'>Field#</label>
+			<input type='text' class='form-control' readonly disabled value='{{index}}' style='text-align:center'/>
+		</div>
+		<div class='col-xs-9 col-sm-6'>
+			<label class='visible-xs'>Name</label>
+			<input type='text' class='form-control' name='name' ng-model='field.name' ng-keypress='TActrl.keyPress(index,$event)'/>
+		</div>
+		<div class='col-xs-5 col-sm-2'>		
+			<label class='visible-xs'>Type</label>
+			<select class='form-control' ng-model='field.type'>
+				<option ng-repeat='type in TActrl.fieldTypes' value='{{type.code}}'>{{type.label}}</option>
+			</select>
+		</div>
+		<div class='col-xs-2 col-sm-1' style='text-align:center; padding:5px 0px 2px'>
+			<label class='visible-xs'>Unique</label>
+			<input type='checkbox' ng-model='field.unique'/>
+		</div>
+		<div class='col-xs-5 col-sm-2' style='text-align:center; padding:7px 0px'>
+		<label class='visible-xs'>Actions</label>
+			<button class='btn btn-sm btn-default' ng-disabled='!TActrl.canMove(index,-1)' ng-click='TActrl.moveField(index,-1)'><i class='fa fa-arrow-up'></i></button>
+			<button class='btn btn-sm btn-default' ng-disabled='!TActrl.canMove(index,+1)' ng-click='TActrl.moveField(index,+1)'><i class='fa fa-arrow-down'></i></button>
+			<button class='btn btn-sm btn-danger' ng-click='TActrl.removeField(index)'><i class='fa fa-remove'></i></button>					
+		</div>
+		<div class='col-xs-12 visible-xs' style='padding:15px'>
+			<hr style='margin:0px'/>
+		</div>
+	</div>
+
+	<div class='row rowtable tr' style='padding-bottom:20px'>
+		<div class='col-xs-3 col-sm-1'>
+			<button id='btn-add-field' class='btn btn-success' ng-click='TActrl.addField()' style='width:100%'><i class='fa fa-plus'></i></button>
+		</div>
+		<div class='col-xs-4 col-sm-9'>
+		</div>
+		<div class='col-xs-5 col-sm-2' style='text-align:center'>
+			<button id='btn-save-table' class='btn btn-primary' ng-click='TActrl.saveTable()' style='width:103px'>Save Table</button>
+		</div>
+	</div>
+
+	<div ng-if='TActrl.origName' class='alert alert-warning'>
+	 	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<h4>Be careful!</h4> If you rename a field but <b>keep its type</b>, the row data will be <b>moved accordly</b>. But if you <b>change</b> the type to anything but String, the data will be <b>lost</b>! 
+	</div>
+
+
+	<div ng-if='!TActrl.origName' class='alert alert-info'>
+	 	<a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		Every table has an 'inner' ID field to identify rows, so there's no need for you to add one.
+	</div>
+</div>

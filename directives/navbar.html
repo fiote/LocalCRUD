@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default">
+	<div class="container">
+		
+		<div id='mainbar-mobile' >
+			<a href="#" style="float:left; margin-left:0px">
+				<i class='fa fa-home fa-2x' style="font-size:2.4em"></i>
+			</a>
+
+			<a href="#" ng-click='NBctrl.clearTables($event)' ng-show='NBctrl.db.tables.length'>
+				<i class='fa fa-trash fa-2x' style='font-size:2.2em'></i>
+			</a>
+			<a href="/#!/tableAdd">
+				<i class='fa fa-calendar-plus-o fa-2x'></i>
+			</a>
+			<a href="/#!/tableList" ng-show='NBctrl.db.tables.length'>
+				<i class='fa fa-list-alt fa-2x' style='font-size:2.3em; margin-top:1px; margin-right:3px'></i>
+			</a>
+
+			<a id="li-table-add" style='margin-right:0px; height:33px'></a>
+
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div id="mainbar" class="hidden-xs hidden-sm">
+			
+			<!-- left navbar -->
+			<ul class="nav navbar-nav">
+				<li ng-repeat='table in NBctrl.db.tables' ng-if='table.isfav'>
+					<a href='/#!/tableView/{{table.name}}'>{{table.name}}</a>
+				</li>
+			</ul>
+
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
+</nav>

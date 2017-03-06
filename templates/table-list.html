@@ -1,0 +1,34 @@
+<div id='table-list' class='container'>
+	<h3>Table List</h3>
+
+	<div class='row rowtable visible-xs th'>
+		<div class='col-xs-6'>Name</div>	
+		<div class='col-xs-3' style='text-align:center'>Fields</div>
+		<div class='col-xs-3' style='text-align:center'>Rows</div>
+	</div>
+	<div class='row rowtable visible-xs tr' ng-repeat='table in TLctrl.db.tables'>
+		<div class='col-xs-6'><a href='/#!/tableView/{{table.name}}'>{{table.name}}</a></div>
+		<div class='col-xs-3' style='text-align:center'>{{table.fields.length}}</div>
+		<div class='col-xs-3' style='text-align:center'>{{table.rows.length}}</div>
+	</div>
+
+	<table class='table fixed hidden-xs' style='font-size:16px'>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th style='width:150px; text-align:center'>Fields</th>
+				<th style='width:150px; text-align:center'>Rows</th>
+				<th style='width:80px; text-align:center'>Favorite</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat='table in TLctrl.db.tables'>
+				<td><a href='/#!/tableView/{{table.name}}'>{{table.name}}</a></td>
+				<td style='text-align:center'>{{table.fields.length}}</td>
+				<td style='text-align:center'>{{table.rows.length}}</td>
+				<td style='text-align:center; padding:3px'><input type='checkbox' ng-model='table.isfav' ng-change='TLctrl.favChange()'></td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

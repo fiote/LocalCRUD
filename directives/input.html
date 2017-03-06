@@ -1,0 +1,20 @@
+<div ng-if='field.tag == "input"'>
+	<input 
+		type="text" 
+		class="form-control {{addclass}}" 
+		ng-class="{'isInt':field.isInt,'isMoney':field.isMoney,'isDate':field.isDate}"
+		placeholder="{{field.name}}" 
+		ng-keydown='ctrl.keyDown($event)' 
+		ng-blur='ctrl.blurInput($event)' 
+		ng-model='ctrl.row[field.name]'
+	/>
+</div>
+<div ng-if='field.tag == "checkbox"'>
+	<input 
+		type="checkbox"
+		class='isFlag'
+		ng-blur='ctrl.blurInput($event)'
+		ng-change='ctrl.changeInput()'
+		ng-model='ctrl.row[field.name]'
+	/>
+</div>

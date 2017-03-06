@@ -1,0 +1,2 @@
+body { font-family:"Lato"; overflow-y:scroll !important; padding-right:0px !important; }
+body.stop-scrolling { overflow-y:scroll; }

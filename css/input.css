@@ -1,0 +1,13 @@
+input.isInt,
+input.isMoney,
+input.isDate {
+	width:50%;
+}
+
+input.isFlag {
+	width:25px;
+	height:25px;
+	margin:0px;
+	position:relative;
+	top:2px;
+}

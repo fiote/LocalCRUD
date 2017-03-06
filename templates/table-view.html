@@ -1,0 +1,93 @@
+<div class='container'>
+	<div style='text-align:right'>
+		<button class='btn btn-default'  ng-click='TVctrl.editTable($event)'><i class='fa fa-pencil'></i> <span class='hidden-xs'>Edit</span></button>
+		<button class='btn btn-warning' ng-click='TVctrl.emptyTable($event)'><i class='fa fa-trash'></i> <span class='hidden-xs'>Empty</span></button>
+		<button class='btn btn-danger' ng-click='TVctrl.deleteTable($event)'><i class='fa fa-remove'></i> <span class='hidden-xs'>Delete</span></button>
+	</div>
+
+	<h1 class='tname hidden-xs'>{{TVctrl.table.name}}</h1>
+	<h3 class='tname visible-xs'>{{TVctrl.table.name}}</h3>
+
+	<div class='row rowtable th visible-xs'>
+	</div>
+
+	<div class='row rowtable tr visible-xs' ng-repeat='(index,row) in TVctrl.table.rows' row-pk='{{row.pk}}' style='border-bottom:1px solid lightgray'>
+		<div class='col-xs-10'>
+			<div class='row rowtable'>
+				<div class='col-xs-3'><b>Id</b>:</div>
+				<div class='col-xs-9'>{{row.pk}}</div>
+			</div>
+			<div class='row rowtable' ng-repeat='field in TVctrl.table.fields'>
+				<div class='col-xs-3'><b>{{field.name}}</b>:</div>
+				<div class='col-xs-9'>{{row['_'+field.name]}}</div>
+			</div>
+		</div>
+		<div class='col-xs-2' style='text-align:right; padding-right:0px'>
+			<button class='btn btn-sm btn-default' ng-click='TVctrl.showAddRow($event,row)' style='margin-bottom:3px'><i class='fa fa-pencil'></i></button>
+			<button class='btn btn-sm btn-danger' ng-click='TVctrl.deleteRow(index,$event)'><i class='fa fa-remove'></i></button>			
+		</div>
+	</div>
+
+	<button class='btn btn-success visible-xs' ng-click='TVctrl.showAddRow($event)' style='margin-top:10px'>Add Row</button>
+
+	<table class='table fixed hidden-xs' style='font-size:16px'>
+		<thead>
+			<tr>
+				<th class='th-id'>ID</th>
+				<th ng-repeat='(index,field) in TVctrl.table.fields' class='th-{{field.type}}'>
+					{{field.name.toUpperCase()}}
+				</th>
+				<th style='width:45px'></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat='(index,row) in TVctrl.table.rows' row-pk='{{row.pk}}'>
+				<td class='td-id'>{{row.pk}}</td>
+				<td ng-repeat='(index,field) in TVctrl.table.fields' class='td-crud td-{{field.type}}' ng-click='TVctrl.editCell(row,field,$event)' ng-class='{edit:TVctrl.isEdit(row,field)}'>
+					<div ng-hide='TVctrl.isEdit(row,field)'>
+						<span class='value'>{{row['_'+field.name]}}</span>
+					</div>
+					<div ng-show='TVctrl.isEdit(row,field)'>
+						<directive-input field='field' ctrl='TVctrl' addclass='"field-sm"'></directive-input>
+					</div>
+				</td>
+				<td style='padding:3px; text-align:center'>
+					<button class='btn btn-sm btn-danger' ng-click='TVctrl.deleteRow(index,$event)'><i class='fa fa-remove'></i></button>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="{{TVctrl.table.fields.length+2}}">
+					<button class='btn btn-success' ng-click='TVctrl.showAddRow($event)'>Add Row</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</div>
+
+<div id='modal-table' class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form class="form-horizontal" ng-submit='TVctrl.saveRow()'>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><b>{{TVctrl.table.name}}</b>: {{TVctrl.row.pk ? 'Edit' : 'Add'}} Row</h4>
+				</div>
+				<div class="modal-body">				
+					<div class="form-group" ng-repeat='field in TVctrl.table.fields' ng-if='field.type != "key"'>
+						<label class="col-sm-3 control-label" style="text-align:right">{{field.name}}</label>
+						<div class="col-sm-9">
+							<directive-input field='field' ctrl='TVctrl'></directive-input>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save Data</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
